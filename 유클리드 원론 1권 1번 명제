@@ -1,0 +1,23 @@
+from manim import *
+
+class MyScene(Scene):
+    def construct(self):
+        point_A = np.array([-1.5, 0, 0])
+        point_B = np.array([1.5, 0, 0])
+        line = Line(point_A, point_B)
+        circle1 = Circle(radius=3)
+        circle1.shift(LEFT*1.5)
+        circle2 = Circle(radius=3)
+        circle2.shift(RIGHT*1.5)
+        triangle = Polygon(LEFT*1.5, RIGHT*1.5, UP*((3*(3**(1/2)))/2))
+        self.play(Create(line))
+        self.wait()
+        self.play(Create(circle1))
+        self.play(Create(circle2))
+        self.wait()
+        self.play(Create(triangle))
+        self.wait()
+        self.remove(line, circle1, circle2)
+        self.wait()
+scene = MyScene()
+scene.render()
