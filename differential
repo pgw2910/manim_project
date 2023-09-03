@@ -1,0 +1,53 @@
+from manim import *
+
+class MyScene(Scene):
+    def construct(self):
+        text1 = MathTex(r"y = f(x) = x^2")
+        text2 = MathTex(r"\frac{d}{dx} f(x) = 2x")
+        text3 = MathTex(r"because")
+        text4 = MathTex(r"\lim_{h \to 0} \frac{f(x+h) - f(x)}{h}")
+        text5 = MathTex(r"\lim_{h \to 0} \frac{(x+h)^2 - x^2}{h}")
+        text6 = MathTex(r"\lim_{h \to 0} \frac{x^2 + 2xh + h^2 - x^2}{h}")
+        text7 = MathTex(r"\lim_{h \to 0} \frac{2xh + h^2}{h}")
+        text8 = MathTex(r"\lim_{h \to 0} 2x + h")
+        text9 = MathTex(r"\therefore \frac{d}{dx} x^2 = 2x")
+        axes = Axes(
+            x_range=[-5, 5, 1],
+            y_range=[-2, 8, 2],
+            axis_config={"color": WHITE},
+        )
+        graph1 = axes.plot(lambda x: x**2, color=BLUE_E)
+        self.play(Create(text1))
+        self.wait(1.5)
+        self.remove(text1)
+        self.wait()
+        self.play(Create(axes))
+        self.wait()
+        self.play(Create(graph1))
+        self.wait()
+        for n in range(-2, 2):
+            graph2 = axes.plot(lambda x: 2*n*x - n**2, color=RED)
+            self.play(Create(graph2))
+            self.wait()
+            self.remove(graph2)
+        self.wait()
+        self.remove(axes, graph1)
+        self.wait()
+        self.play(Create(text2))
+        self.wait()
+        self.play(Transform(text2, text3))
+        self.wait()
+        self.play(Transform(text2, text4))
+        self.wait()
+        self.play(Transform(text2, text5))
+        self.wait()
+        self.play(Transform(text2, text6))
+        self.wait()
+        self.play(Transform(text2, text7))
+        self.wait()
+        self.play(Transform(text2, text8))
+        self.wait()
+        self.play(Transform(text2, text9))
+        self.wait()
+scene = MyScene()
+scene.render()
